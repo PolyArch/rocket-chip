@@ -8,6 +8,8 @@ docs-target/
 *.anno.json
 *.swp
 *~
+.idea
+.sbtopts
 .addons-dont-touch
 /lib/
 /test_lib/
