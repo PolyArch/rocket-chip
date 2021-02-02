@@ -1,2 +1,2 @@
 -Dsbt.sourcemode=true
--Dsbt.workspace=$PWD
+-Dsbt.workspace=/home/sihao/repo/chipyard/generators/rocket-chip

@@ -15,7 +15,7 @@ class ClockSourceIO extends Bundle {
 /** This clock source is only intended to be used in test harnesses, and does not work correctly in verilator. */
 class ClockSourceAtFreq(val freqMHz: Double) extends BlackBox(Map(
   "PERIOD_PS" -> DoubleParam(1000000/freqMHz)
-)) with HasBlackBoxInline {
+)) with HasBlackBoxInline with HasClockSourceIO{
   val io = IO(new ClockSourceIO)
 
   setInline("ClockSourceAtFreq.v",
@@ -39,7 +39,7 @@ class ClockSourceAtFreq(val freqMHz: Double) extends BlackBox(Map(
 
 /** This clock source is only intended to be used in test harnesses, and does not work correctly in verilator. */
 class ClockSourceAtFreqFromPlusArg(val plusArgName: String) extends BlackBox
-    with HasBlackBoxInline {
+    with HasBlackBoxInline with HasClockSourceIO{
   val io = IO(new ClockSourceIO)
 
   override def desiredName = s"ClockSourceAtFreqFromPlusArg$plusArgName"
@@ -66,6 +66,10 @@ class ClockSourceAtFreqFromPlusArg(val plusArgName: String) extends BlackBox
       |  assign clk = clk_i;
       |endmodule
       |""".stripMargin)
+}
+
+trait HasClockSourceIO {
+  val io : ClockSourceIO
 }
 
 /** This clock source is only intended to be used in test harnesses, and does not work correctly in verilator. */
